@@ -5,7 +5,8 @@ class Player
     @name = name
   end
   def pick_a_number
-    player_guess = gets.chomp.to_i
+    print "<Choose a number:>"
+    gets.chomp.to_i
   end
 end
 
@@ -19,20 +20,41 @@ class Game
     print "<What's your name>: "
     gets.chomp
   end
-  def win_logic
-    if player_guess == SECRET_NUMBER
-      puts "You won! That's correct!"
+  def loss_logic(player_guess, player)
+    if player_guess == 5
+      puts "Gameover"
       exit
-    elsif player_guess < SECRET_NUMBER
-      puts "Your guess is too Low."
-    elsif player_guess > SECRET_NUMBER
-      puts "Your guess is too High."
     end
   end
+  def win_logic(player_guess, player)
+    loop do
+      if player_guess == SECRET_NUMBER
+        puts "You won! That's correct!"
+        exit
+      elsif player_guess < SECRET_NUMBER
+        puts "Your guess is too Low."
+        player_guess = player.pick_a_number
+      elsif player_guess > SECRET_NUMBER
+        puts "Your guess is too High."
+        player_guess = player.pick_a_number
+      end
+      def loss_logic(player_guess, player)
+        if player_guess == 5
+          puts "Gameover"
+          exit
+        end
+      end
+    end
+  end
+
   def start
     welcome
     name = grab_name
-    pick_a_number
+    player = Player.new(name)
+    pick_a_number = player.pick_a_number
+    win_logic(pick_a_number, player)
+    loss_logic(pick_a_number, player)
+
   end
 end
 
