@@ -4,11 +4,8 @@ class Player
   def initialize(name)
     @name = name
   end
-end
-
-class Random
-  def random_generator
-   rand(1..100)
+  def pick_a_number
+    player_guess = gets.chomp.to_i
   end
 end
 
@@ -22,12 +19,23 @@ class Game
     print "<What's your name>: "
     gets.chomp
   end
+  def win_logic
+    if player_guess == SECRET_NUMBER
+      puts "You won! That's correct!"
+      exit
+    elsif player_guess < SECRET_NUMBER
+      puts "Your guess is too Low."
+    elsif player_guess > SECRET_NUMBER
+      puts "Your guess is too High."
+    end
+  end
   def start
     welcome
     name = grab_name
+    pick_a_number
   end
 end
 
-
+SECRET_NUMBER = rand(1..100)
 game = Game.new
 game.start
