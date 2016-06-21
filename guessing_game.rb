@@ -35,12 +35,15 @@ class Game
       elsif player_guess < SECRET_NUMBER
         puts "Your guess is too Low."
         player_guess = player.pick_a_number
-      elsif player_guess == recorded_guess
-        puts "You picked the same number!"
-        recorded_guess.include?(player_guess) == player_guess
+         if recorded_guess.include?(player_guess)
+             puts "You picked the same number!"
+         end
       elsif player_guess > SECRET_NUMBER
         puts "Your guess is too High."
         player_guess = player.pick_a_number
+        if recorded_guess.include?(player_guess)
+            puts "You picked the same number!"
+        end
       elsif player_guess == same
         puts "You guessed the same number?!"
       elsif player_guess == SECRET_NUMBER
