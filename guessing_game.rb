@@ -25,6 +25,8 @@ class Game
   end
   def win_logic(player_guess, player)
     turns = 0
+    recorded_guess = []
+    recorded_guess << player_guess
     loop do
       puts "Turn #{turns}"
       if turns == MAX_PLAYER_ATTEMPTS
@@ -33,15 +35,19 @@ class Game
       elsif player_guess < SECRET_NUMBER
         puts "Your guess is too Low."
         player_guess = player.pick_a_number
+      elsif player_guess == recorded_guess
+        puts "You picked the same number!"
+        recorded_guess.include?(player_guess) == player_guess
       elsif player_guess > SECRET_NUMBER
         puts "Your guess is too High."
         player_guess = player.pick_a_number
-
+      elsif player_guess == same
+        puts "You guessed the same number?!"
       elsif player_guess == SECRET_NUMBER
       puts "You won! That's correct!"
       exit
       end
-              turns += 1
+      turns += 1
     end
   end
 
