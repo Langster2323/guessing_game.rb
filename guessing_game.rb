@@ -47,8 +47,6 @@
                 puts "You picked the same number!"
             end
 
-          elsif player_guess == same
-            puts "You guessed the same number?!"
           elsif player_guess == SECRET_NUMBER
           puts "You won! That's correct!"
           exit
